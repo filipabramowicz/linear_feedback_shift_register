@@ -6,21 +6,28 @@
 
 extern lfsr global_lfsr;
 
-/* A test case that does nothing and succeeds. */
-static void null_test_success(void **state) {
-    (void) state; /* unused */
-}
-
 static void test_initialize_seed() {
+
     unsigned int seed = 45;
     initialize(seed);
 
     assert_int_equal(global_lfsr.state, seed);
 }
 
+static void test_step_1() {
+
+    unsigned int seed           = 0b1111111111111111;
+    unsigned int expected_state = 0b1111111111111110;
+    initialize(seed);
+
+    step();
+    assert_int_equal(global_lfsr.state, expected_state);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_initialize_seed),
+        cmocka_unit_test(test_step_1),
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
