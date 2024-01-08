@@ -34,11 +34,22 @@ static void test_step_2() {
     assert_int_equal(global_lfsr.state, expected_state);
 }
 
+static void test_step_3() {
+
+    unsigned int seed           = 0b1111111111111100;
+    unsigned int expected_state = 0b1111111111111000;
+    initialize(seed);
+
+    step();
+    assert_int_equal(global_lfsr.state, expected_state);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_initialize_seed),
         cmocka_unit_test(test_step_1),
         cmocka_unit_test(test_step_2),
+        cmocka_unit_test(test_step_3),
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
