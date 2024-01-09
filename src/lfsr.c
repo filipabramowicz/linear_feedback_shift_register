@@ -3,9 +3,11 @@
 
 lfsr global_lfsr;
 
-void initialize(unsigned int seed)
+void initialize(unsigned int seed,
+                unsigned int sizeInBits)
 {
     global_lfsr.state = seed;
+    global_lfsr.sizeInBits = sizeInBits;
 }
 
 void print_bits(size_t const size, void const * const ptr)
@@ -33,6 +35,10 @@ int step()
 
     // Shift the state
     global_lfsr.state = global_lfsr.state << 1;
+
+    // Prepare the mask depending on the size of LFSR
+    unsigned int sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
+    print_bits(sizeof(sizeDependentMask), &sizeDependentMask);
 
     // Apply mask for 16bits
     global_lfsr.state = 0xffff & global_lfsr.state;
