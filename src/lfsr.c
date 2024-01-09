@@ -28,8 +28,8 @@ void print_bits(size_t const size, void const * const ptr)
 
 int step()
 {
-    printf("      State before the change: %u\n", global_lfsr.state);
-    print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
+    //printf("      State before the change: %u\n", global_lfsr.state);
+    //print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
 
     // Shift the state
     global_lfsr.state = global_lfsr.state << 1;
@@ -45,22 +45,22 @@ int step()
 
     unsigned int sum = valueOfFirstBitForSumator ^ valueOfSecondBitForSumator;
 
-    printf("      valueOfFirstBitForSumator:\n");
-    print_bits(sizeof(valueOfFirstBitForSumator), &valueOfFirstBitForSumator);
+    //printf("      valueOfFirstBitForSumator:\n");
+    //print_bits(sizeof(valueOfFirstBitForSumator), &valueOfFirstBitForSumator);
 
-    printf("      valueOfSecondBitForSumator:\n");
-    print_bits(sizeof(valueOfSecondBitForSumator), &valueOfSecondBitForSumator);
+    //printf("      valueOfSecondBitForSumator:\n");
+    //print_bits(sizeof(valueOfSecondBitForSumator), &valueOfSecondBitForSumator);
     // Prepare reversed mask
     int mask = ~1;
 
-    printf("      sum:\n");
-    print_bits(sizeof(sum), &sum);
+    //printf("      sum:\n");
+    //print_bits(sizeof(sum), &sum);
 
     // Clear the less significant bit
 
     global_lfsr.state = (global_lfsr.state & mask) ^ sum;
 
-    printf("      State after the change: %u\n", global_lfsr.state);
+    //printf("      State after the change: %u\n", global_lfsr.state);
     print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
     return 0;
 };

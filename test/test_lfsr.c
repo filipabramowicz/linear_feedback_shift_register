@@ -4,6 +4,8 @@
 #include <cmocka.h>
 #include "lfsr.h"
 
+#include <stdio.h>
+
 extern lfsr global_lfsr;
 
 static void test_initialize_seed() {
@@ -44,12 +46,25 @@ static void test_step_3() {
     assert_int_equal(global_lfsr.state, expected_state);
 }
 
+static void test_step_4() {
+
+    unsigned int seed           = 0b1111111111111111;
+    unsigned int expected_state = 0b1100000000000001;
+    initialize(seed);
+    for (int i=0; i<14; i++){
+        step();
+    }
+
+    assert_int_equal(global_lfsr.state, expected_state);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_initialize_seed),
         cmocka_unit_test(test_step_1),
         cmocka_unit_test(test_step_2),
         cmocka_unit_test(test_step_3),
+        cmocka_unit_test(test_step_4),
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
