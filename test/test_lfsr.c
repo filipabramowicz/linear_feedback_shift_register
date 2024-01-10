@@ -49,7 +49,7 @@ static void test_lfsr_16bit_step_3() {
 static void test_lfsr_16bit_step_4() {
 
     unsigned int seed           = 0b1111111111111111;
-    unsigned int expected_state = 0b1100000000000001;
+    unsigned int expected_state = 0b1100000000000000;
     initialize(seed, 16, 13);
     for (int i=0; i<14; i++){
         step();
@@ -61,7 +61,7 @@ static void test_lfsr_16bit_step_4() {
 static void test_lfsr_4bit_step_1() {
 
     unsigned int seed = 0b1111;
-    initialize(seed, 4, 3);
+    initialize(seed, 4, 2);
 
     step();
     assert_int_equal(global_lfsr.state, 0b1110);
@@ -69,6 +69,44 @@ static void test_lfsr_4bit_step_1() {
     step();
     assert_int_equal(global_lfsr.state, 0b1100);
 
+    step();
+    assert_int_equal(global_lfsr.state, 0b1000);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0001);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0010);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0100);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b1001);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0011);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0110);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b1101);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b1010);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0101);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b1011);
+
+    step();
+    assert_int_equal(global_lfsr.state, 0b0111);
+
+    step();
+    assert_int_equal(global_lfsr.state, seed);
 }
 
 int main(void) {

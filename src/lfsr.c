@@ -35,16 +35,6 @@ int step()
     //printf("      State before the change: %u\n", global_lfsr.state);
     //print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
 
-    // Shift the state
-    global_lfsr.state = global_lfsr.state << 1;
-
-    // Prepare the mask depending on the size of LFSR
-    unsigned int sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
-    print_bits(sizeof(sizeDependentMask), &sizeDependentMask);
-
-    // Apply mask
-    global_lfsr.state = sizeDependentMask & global_lfsr.state;
-
     // First bit for the adder should always be the most significant bit
     int positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
     // Second bit for the adder shoule be defined by tapPosition
@@ -54,6 +44,16 @@ int step()
     unsigned int valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
 
     unsigned int sum = valueOfFirstBitForAdder ^ valueOfSecondBitForAdder;
+
+    // Shift the state
+    global_lfsr.state = global_lfsr.state << 1;
+
+    // Prepare the mask depending on the size of LFSR
+    unsigned int sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
+    //print_bits(sizeof(sizeDependentMask), &sizeDependentMask);
+
+    // Apply mask
+    global_lfsr.state = sizeDependentMask & global_lfsr.state;
 
     //printf("      valueOfFirstBitForAdder:\n");
     //print_bits(sizeof(valueOfFirstBitForAdder), &valueOfFirstBitForAdder);
