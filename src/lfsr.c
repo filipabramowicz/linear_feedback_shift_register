@@ -43,19 +43,20 @@ int step()
     // Apply mask
     global_lfsr.state = sizeDependentMask & global_lfsr.state;
 
-    int positionOfFirstBitForSumator = 15;
-    int positionOfSecondBitForSumator = 13;
+    // First bit for the adder should always
+    int positionOfFirstBitForAdder = 15;
+    int positionOfSecondBitForAdder = 13;
 
-    unsigned int valueOfFirstBitForSumator = 1 & (global_lfsr.state >> positionOfFirstBitForSumator);
-    unsigned int valueOfSecondBitForSumator = 1 & (global_lfsr.state >> positionOfSecondBitForSumator);
+    unsigned int valueOfFirstBitForAdder = 1 & (global_lfsr.state >> positionOfFirstBitForAdder);
+    unsigned int valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
 
-    unsigned int sum = valueOfFirstBitForSumator ^ valueOfSecondBitForSumator;
+    unsigned int sum = valueOfFirstBitForAdder ^ valueOfSecondBitForAdder;
 
-    //printf("      valueOfFirstBitForSumator:\n");
-    //print_bits(sizeof(valueOfFirstBitForSumator), &valueOfFirstBitForSumator);
+    //printf("      valueOfFirstBitForAdder:\n");
+    //print_bits(sizeof(valueOfFirstBitForAdder), &valueOfFirstBitForAdder);
 
-    //printf("      valueOfSecondBitForSumator:\n");
-    //print_bits(sizeof(valueOfSecondBitForSumator), &valueOfSecondBitForSumator);
+    //printf("      valueOfSecondBitForAdder:\n");
+    //print_bits(sizeof(valueOfSecondBitForAdder), &valueOfSecondBitForAdder);
     // Prepare reversed mask
     int mask = ~1;
 
