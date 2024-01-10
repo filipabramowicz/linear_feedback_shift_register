@@ -45,9 +45,10 @@ int step()
     // Apply mask
     global_lfsr.state = sizeDependentMask & global_lfsr.state;
 
-    // First bit for the adder should always
-    int positionOfFirstBitForAdder = 15;
-    int positionOfSecondBitForAdder = 13;
+    // First bit for the adder should always be the most significant bit
+    int positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
+    // Second bit for the adder shoule be defined by tapPosition
+    int positionOfSecondBitForAdder = global_lfsr.tapPosition;
 
     unsigned int valueOfFirstBitForAdder = 1 & (global_lfsr.state >> positionOfFirstBitForAdder);
     unsigned int valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
