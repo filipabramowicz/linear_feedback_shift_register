@@ -40,8 +40,8 @@ int step()
     unsigned int sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
     print_bits(sizeof(sizeDependentMask), &sizeDependentMask);
 
-    // Apply mask for 16bits
-    global_lfsr.state = 0xffff & global_lfsr.state;
+    // Apply mask
+    global_lfsr.state = sizeDependentMask & global_lfsr.state;
 
     int positionOfFirstBitForSumator = 15;
     int positionOfSecondBitForSumator = 13;
