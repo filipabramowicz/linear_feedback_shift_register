@@ -4,10 +4,12 @@
 lfsr global_lfsr;
 
 void initialize(unsigned int seed,
-                unsigned int sizeInBits)
+                unsigned int sizeInBits,
+                unsigned int tapPosition)
 {
     global_lfsr.state = seed;
     global_lfsr.sizeInBits = sizeInBits;
+    global_lfsr.tapPosition = tapPosition;
 }
 
 void print_bits(size_t const size, void const * const ptr)
