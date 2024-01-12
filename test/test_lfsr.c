@@ -68,6 +68,18 @@ static void test_lfsr_16bit_step_5() {
     assert_int_equal(global_lfsr.state, seed);
 }
 
+static void test_lfsr_32bit_step_1() {
+    unsigned int seed = 0b11111111111111111111111111111111;
+    initialize(seed, 32, 30);
+
+    for (int i=0; i < 1023; i++) {
+        step();
+    }
+
+    assert_int_equal(global_lfsr.state, seed);
+}
+
+
 static void test_lfsr_4bit_step_1() {
 
     unsigned int seed = 0b1111;
@@ -128,6 +140,7 @@ int main(void) {
         cmocka_unit_test(test_lfsr_16bit_step_4),
         cmocka_unit_test(test_lfsr_16bit_step_5),
         cmocka_unit_test(test_lfsr_4bit_step_1),
+        cmocka_unit_test(test_lfsr_32bit_step_1),
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }

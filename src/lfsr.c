@@ -33,12 +33,12 @@ void print_bits(size_t const size, void const * const ptr)
 int step()
 {
     //printf("      State before the change: %u\n", global_lfsr.state);
-    //print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
+    print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
 
     // First bit for the adder should always be the most significant bit
-    int positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
+    unsigned int positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
     // Second bit for the adder shoule be defined by tapPosition
-    int positionOfSecondBitForAdder = global_lfsr.tapPosition;
+    unsigned int positionOfSecondBitForAdder = global_lfsr.tapPosition;
 
     unsigned int valueOfFirstBitForAdder = 1 & (global_lfsr.state >> positionOfFirstBitForAdder);
     unsigned int valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
@@ -49,8 +49,19 @@ int step()
     global_lfsr.state = global_lfsr.state << 1;
 
     // Prepare the mask depending on the size of LFSR
-    unsigned int sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
-    //print_bits(sizeof(sizeDependentMask), &sizeDependentMask);
+    unsigned int sizeDependentMask = 0;
+
+    // The bitmap fields is 32 bits long. According to C standard attempting
+    // to shift more positions than there is a room in the left operand invoked
+    // undefined behavior. That's why for 32bit LFSR we cannot calculated the
+    // bitmap by shifting left by 32. Instead 32bit mask can be calculated by
+    // invoking bitwsise NOT on 0.
+    if (global_lfsr.sizeInBits < 32) {
+        sizeDependentMask = (1 << global_lfsr.sizeInBits) - 1;
+    }
+    else {
+        sizeDependentMask = ~0;
+    }
 
     // Apply mask
     global_lfsr.state = sizeDependentMask & global_lfsr.state;
@@ -61,7 +72,7 @@ int step()
     //printf("      valueOfSecondBitForAdder:\n");
     //print_bits(sizeof(valueOfSecondBitForAdder), &valueOfSecondBitForAdder);
     // Prepare reversed mask
-    int mask = ~1;
+    unsigned int mask = ~1;
 
     //printf("      sum:\n");
     //print_bits(sizeof(sum), &sum);
