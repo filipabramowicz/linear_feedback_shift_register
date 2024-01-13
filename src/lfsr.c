@@ -3,13 +3,24 @@
 
 lfsr global_lfsr;
 
-void initialize(uint32_t seed,
-                uint32_t sizeInBits,
-                uint32_t tapPosition)
+int initialize(uint32_t seed,
+               uint32_t sizeInBits,
+               uint32_t tapPosition)
 {
+    if (sizeInBits > 32) {
+        return RC_NOK_SIZE_INT_BITS_GREATER_THAN_32;
+    }
+
+    if (tapPosition > sizeInBits ) {
+        return RC_NOK_TAP_POSITION_GREATER_THAN_LFSR_SIZE;
+
+    }
+
     global_lfsr.state = seed;
     global_lfsr.sizeInBits = sizeInBits;
     global_lfsr.tapPosition = tapPosition;
+
+    return RC_OK;
 }
 
 void print_bits(size_t const size, void const * const ptr)
