@@ -3,9 +3,9 @@
 
 lfsr global_lfsr;
 
-void initialize(unsigned int seed,
-                unsigned int sizeInBits,
-                unsigned int tapPosition)
+void initialize(uint32_t seed,
+                uint32_t sizeInBits,
+                uint32_t tapPosition)
 {
     global_lfsr.state = seed;
     global_lfsr.sizeInBits = sizeInBits;
@@ -36,20 +36,20 @@ int step()
     print_bits(sizeof(global_lfsr.state), &global_lfsr.state);
 
     // First bit for the adder should always be the most significant bit
-    unsigned int positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
+    uint32_t positionOfFirstBitForAdder = global_lfsr.sizeInBits - 1;
     // Second bit for the adder shoule be defined by tapPosition
-    unsigned int positionOfSecondBitForAdder = global_lfsr.tapPosition;
+    uint32_t positionOfSecondBitForAdder = global_lfsr.tapPosition;
 
-    unsigned int valueOfFirstBitForAdder = 1 & (global_lfsr.state >> positionOfFirstBitForAdder);
-    unsigned int valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
+    uint32_t valueOfFirstBitForAdder = 1 & (global_lfsr.state >> positionOfFirstBitForAdder);
+    uint32_t valueOfSecondBitForAdder = 1 & (global_lfsr.state >> positionOfSecondBitForAdder);
 
-    unsigned int sum = valueOfFirstBitForAdder ^ valueOfSecondBitForAdder;
+    uint32_t sum = valueOfFirstBitForAdder ^ valueOfSecondBitForAdder;
 
     // Shift the state
     global_lfsr.state = global_lfsr.state << 1;
 
     // Prepare the mask depending on the size of LFSR
-    unsigned int sizeDependentMask = 0;
+    uint32_t sizeDependentMask = 0;
 
     // The bitmap fields is 32 bits long. According to C standard attempting
     // to shift more positions than there is a room in the left operand invoked
@@ -72,7 +72,7 @@ int step()
     //printf("      valueOfSecondBitForAdder:\n");
     //print_bits(sizeof(valueOfSecondBitForAdder), &valueOfSecondBitForAdder);
     // Prepare reversed mask
-    unsigned int mask = ~1;
+    uint32_t mask = ~1;
 
     //printf("      sum:\n");
     //print_bits(sizeof(sum), &sum);

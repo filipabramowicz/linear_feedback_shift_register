@@ -1,14 +1,16 @@
+#include <stdint.h>
+
 typedef struct lfsr
 {
-    unsigned int state;
-    unsigned int sizeInBits;
-    unsigned int tapPosition;
+    uint32_t state;
+    uint32_t sizeInBits;
+    uint32_t tapPosition;
 
 } lfsr;
 
-void initialize(unsigned int seed,
-                unsigned int sizeInBits,
-                unsigned int tapPosition);
+void initialize(uint32_t seed,
+                uint32_t sizeInBits,
+                uint32_t tapPosition);
 
 void print_bits(size_t const size, void const * const ptr);
 
