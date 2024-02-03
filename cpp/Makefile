@@ -1,5 +1,5 @@
 .PHONY: all
-all: test
+all: product test
 
 .PHONY: product
 product:
