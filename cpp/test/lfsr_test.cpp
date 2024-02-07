@@ -6,7 +6,8 @@ TEST_GROUP(LfsrTests) {};
 
 TEST(LfsrTests, TestLfsrInitializeSeed) {
     uint32_t seed = 45;
-    Lfsr myLfsr(seed, 16, 13);
+    Lfsr myLfsr(seed);
+    myLfsr.initialize(16, 13);
 
     CHECK_EQUAL(seed, myLfsr.getState());
 };
