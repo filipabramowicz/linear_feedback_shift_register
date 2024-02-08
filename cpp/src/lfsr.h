@@ -11,8 +11,8 @@ using namespace std;
 class Lfsr {
 
     private:
-        uint32_t state;
-        uint32_t returnCode;
+        uint32_t registerState;
+        uint32_t initializationState;
         uint32_t sizeInBits;
         uint32_t tapPosition;
 
@@ -22,7 +22,7 @@ class Lfsr {
         int step();
 
         uint32_t getState() {
-            return state;
+            return registerState;
         }
 
         void setSizeInBits(uint32_t sizeInBits) {
@@ -36,6 +36,6 @@ class Lfsr {
         uint32_t initialize(uint32_t sizeInBits, uint32_t tapPosition);
 
         uint32_t getLfsrInitializationState() {
-            return returnCode;
+            return initializationState;
         }
 };

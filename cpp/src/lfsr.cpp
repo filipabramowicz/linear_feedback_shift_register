@@ -1,7 +1,7 @@
 #include "lfsr.h"
 
 Lfsr::Lfsr(uint32_t seed)
-    : state(seed) {}
+    : registerState(seed) {}
 
 uint32_t Lfsr::initialize(uint32_t sizeInBits, uint32_t tapPosition) {
 
