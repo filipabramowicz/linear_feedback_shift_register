@@ -5,14 +5,19 @@
 TEST_GROUP(LfsrTests) {};
 
 TEST(LfsrTests, TestLfsrInitializeSeed) {
+
     uint32_t seed = 45;
     Lfsr myLfsr(seed);
-    myLfsr.initialize(16, 13);
 
     CHECK_EQUAL(seed, myLfsr.getState());
+
+    uint32_t rc = myLfsr.initialize(16, 13);
+
+    CHECK_EQUAL(rc, RC_OK);
 };
 
 TEST(LfsrTests, TestLfsrInitializeNokSizeGreaterThanMax) {
+
     uint32_t seed = 45;
     Lfsr myLfsr(seed);
 
