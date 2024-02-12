@@ -6,6 +6,10 @@
 #define RC_NOK_SIZE_INT_BITS_GREATER_THAN_32 -1
 #define RC_NOK_TAP_POSITION_GREATER_THAN_LFSR_SIZE -2
 
+// Initialization states
+#define LFSR_NOT_INITIALIZED 0
+#define LFSR_ACTIVE 1
+
 using namespace std;
 
 class Lfsr {
@@ -33,9 +37,13 @@ class Lfsr {
             tapPosition = tapPosition;
         }
 
+        void getInitializationState(uint32_t initializationState) {
+            initializationState = initializationState;
+        }
+
         uint32_t initialize(uint32_t sizeInBits, uint32_t tapPosition);
 
-        uint32_t getLfsrInitializationState() {
+        uint32_t getInitializationState() {
             return initializationState;
         }
 
