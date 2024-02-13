@@ -23,8 +23,6 @@ class Lfsr {
     public:
         Lfsr(uint32_t seed);
 
-        int step();
-
         uint32_t getState() {
             return registerState;
         }
@@ -41,7 +39,6 @@ class Lfsr {
             initializationState = initializationState;
         }
 
-        uint32_t initialize(uint32_t sizeInBits, uint32_t tapPosition);
 
         uint32_t getInitializationState() {
             return initializationState;
@@ -64,4 +61,7 @@ class Lfsr {
             }
             puts("");
         }
+
+        uint32_t initialize(uint32_t sizeInBits, uint32_t tapPosition);
+        int step();
 };
