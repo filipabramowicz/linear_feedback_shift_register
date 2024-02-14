@@ -9,7 +9,7 @@ TEST(LfsrTests, TestLfsrInitializeSeed) {
     uint32_t seed = 45;
     Lfsr myLfsr(seed);
 
-    CHECK_EQUAL(seed, myLfsr.getState());
+    CHECK_EQUAL(seed, myLfsr.getRegisterState());
 
     uint32_t rc = myLfsr.initialize(16, 13);
 
@@ -21,7 +21,7 @@ TEST(LfsrTests, TestLfsrInitializeNokSizeGreaterThanMax) {
     uint32_t seed = 45;
     Lfsr myLfsr(seed);
 
-    CHECK_EQUAL(seed, myLfsr.getState());
+    CHECK_EQUAL(seed, myLfsr.getRegisterState());
 
     uint32_t rc = myLfsr.initialize(55, 13);
 
@@ -32,7 +32,7 @@ TEST(LfsrTests, TestLfsrInitializeNokTapPositionGreaterThanSize) {
     uint32_t seed = 45;
     Lfsr myLfsr(seed);
 
-    CHECK_EQUAL(seed, myLfsr.getState());
+    CHECK_EQUAL(seed, myLfsr.getRegisterState());
 
     uint32_t rc = myLfsr.initialize(16, 18);
 

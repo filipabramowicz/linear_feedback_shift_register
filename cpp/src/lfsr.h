@@ -23,7 +23,7 @@ class Lfsr {
     public:
         Lfsr(uint32_t seed);
 
-        uint32_t getState() {
+        uint32_t getRegisterState() {
             return registerState;
         }
 
@@ -35,7 +35,7 @@ class Lfsr {
             tapPosition = tapPosition;
         }
 
-        void getInitializationState(uint32_t initializationState) {
+        void setInitializationState(uint32_t initializationState) {
             initializationState = initializationState;
         }
 
